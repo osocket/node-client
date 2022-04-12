@@ -1,0 +1,29 @@
+{
+  "name": "opensocket",
+  "version": "1.0.0",
+  "description": "Open socket client library",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osocket/node-client.git"
+  },
+  "keywords": [
+    "socket"
+  ],
+  "author": "nvioir@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/osocket/node-client/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/osocket/node-client#readme",
+  "dependencies": {
+    "node-machine-id": "^1.1.12",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1"
+  }
+}
