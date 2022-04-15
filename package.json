@@ -4,7 +4,7 @@
   "description": "Open socket client library",
   "main": "OpenSocket.js",
   "scripts": {
-    "test": "node example.js",
+    "test": "node example.js"
   },
   "repository": {
     "type": "git",
