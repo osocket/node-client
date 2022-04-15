@@ -25,8 +25,6 @@ class OpenSocket {
             throw new Error('Config values ​​are not set. Please set developer_id, project_id, client_token');
         }
 
-        console.log('connecting to OpenSocket');
-
         this.user_token = this.getUserToken()
 
         if(this.user_token.length>5){
