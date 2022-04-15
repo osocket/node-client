@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Open socket client library",
   "main": "OpenSocket.js",
-  "scripts": {
-    "test": "node example.js"
-  },
+  "bin":"OpenSocket.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/osocket/node-client.git"
