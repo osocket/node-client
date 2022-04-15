@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import machineId from 'node-machine-id';
+import fs from 'fs';
 
 class OpenSocket {
 
@@ -7,7 +8,6 @@ class OpenSocket {
 
         options = options || {};
 
-        this.register = options.register || true;
         this.developer_id = options.developer_id || false;
         this.project_id = options.project_id || false;
         this.client_token = options.client_token || false;
@@ -25,6 +25,17 @@ class OpenSocket {
             throw new Error('Config values ​​are not set. Please set developer_id, project_id, client_token');
         }
 
+        console.log('connecting to OpenSocket');
+
+        this.user_token = this.getUserToken()
+
+        if(this.user_token.length>5){
+          this.register = true;
+        }
+        else{
+          this.register = false;
+        }
+
         var query = {
             register: this.register,
             time: new Date().getTime(),
@@ -32,6 +43,7 @@ class OpenSocket {
             developer_id: this.developer_id,
             project_id: this.project_id,
             client_token: this.client_token,
+            token:this.user_token,
             customer:'node-client'
         }
 
@@ -39,15 +51,15 @@ class OpenSocket {
             query.token = this.user_token;
         }
 
-        console.log(query);
-
         const socket = io(this.server, {
             query: query
         });
 
+        this.socket = socket;
 
         socket.on("connect", () => {
-            this.onConnect()            
+          console.log('connected to OpenSocket');
+          this.onConnect()
         });
 
         socket.on("disconnect", () => {
@@ -58,19 +70,37 @@ class OpenSocket {
             this.onReceive(message);
         })
 
-        socket.on('register',(token)=>{
-            this.onRegister(token);
+        socket.on('register',(ob)=>{
+          try {
+            fs.writeFileSync('./id',ob.token);
+            this.reconnect()
+          } catch (e) {
+
+          }
+            this.onRegister(ob);
         })
     }
 
     disconnect(){
-
+      this.socket.disconnect();
+      this.socket.offAny();
     }
 
     reconnect(){
-
+      console.log('trying register and reconnect ...');
+      this.disconnect();
+      setTimeout(()=>{
+        this.connect();
+      },3000)
     }
 
+    getUserToken(){
+      try {
+        return fs.readFileSync('./id','utf8');
+      } catch (e) {
+        return '';
+      }
+    }
 
 
 }

@@ -2,10 +2,9 @@
   "name": "opensocket",
   "version": "1.0.0",
   "description": "Open socket client library",
-  "main": "index.js",
+  "main": "OpenSocket.js",
   "scripts": {
-    "test": "node test.js",
-    "start": "node index.js"
+    "test": "node example.js",
   },
   "repository": {
     "type": "git",
