@@ -1,5 +1,5 @@
 {
-  "name": "opensocket",
+  "name": "osocket",
   "version": "1.0.0",
   "description": "Open socket client library",
   "main": "OpenSocket.js",
