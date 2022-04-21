@@ -36,7 +36,7 @@ osocket.connect();
 
 
 function onConnect(){
-  console.log('onConnect',msg);
+  console.log('onConnect');
 }
 
 function onReceive(msg){
